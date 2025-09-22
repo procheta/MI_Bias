@@ -32,7 +32,8 @@ for i in range(400):
     if endpoint =="":
         endpoint=extract_numbers(st[0])
     num=1
-    
+    if endpoint=="":
+        endpoint="0"
     if max_edge < int(endpoint):
         max_edge=int(endpoint)
     if endpoint in edge_dict.keys():
@@ -51,7 +52,7 @@ import matplotlib.pyplot as plt
 
 categories=[]
 values=[]
-for i in range(max_edge):
+for i in range(max_edge+1):
     if str(i) in edge_dict.keys():
         categories.append(i)
         val=edge_dict[str(i)]-10
@@ -67,8 +68,10 @@ plt.bar(categories, values, color="purple")
 
 # Add labels and title
 plt.xlabel("Layers")
-plt.xlim(0,23)
-plt.ylim(0,50)
+plt.xlim(0,24)
+plt.ylim(0,30)
+plt.xticks(ticks=categories,                    # positions
+    labels=categories)
 plt.ylabel("#Important Edges")
 
 # Show the chart
