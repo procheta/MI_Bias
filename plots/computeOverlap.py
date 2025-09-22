@@ -1,24 +1,25 @@
 import pandas as pd
+import numpy as np
 
 df_edges = pd.read_csv('/home/ubuntu/MI_Bias/Dataset/topn_qwen_edges_updated-2.csv')
 
 top400_overlap_matrix = []
-for x in ([df_edges['qwen_dss1_pos'], df_edges['qwen_dss1_neg'], df_edges['qwen_dss2_pos'], df_edges['qwen_gss1_pos'], df_edges['qwen_gss1_neg'], df_edges['qwen_gss2_pos'], df_edges['qwen_gss2_neg']]):
-  for y in ([df_edges['qwen_dss1_pos'], df_edges['qwen_dss1_neg'], df_edges['qwen_dss2_pos'], df_edges['qwen_gss1_pos'], df_edges['qwen_gss1_neg'], df_edges['qwen_gss2_pos'], df_edges['qwen_gss2_neg']]):
+for x in ([df_edges['qwen_dss1_pos'].head(500), df_edges['qwen_dss1_neg'].head(500), df_edges['qwen_dss2_pos'].head(500), df_edges['qwen_gss1_pos'].head(500), df_edges['qwen_gss1_neg'].head(500), df_edges['qwen_gss2_pos'].head(500), df_edges['qwen_gss2_neg'].head(500)]):
+  for y in ([df_edges['qwen_dss1_pos'].head(500), df_edges['qwen_dss1_neg'].head(500), df_edges['qwen_dss2_pos'].head(500), df_edges['qwen_gss1_pos'].head(500), df_edges['qwen_gss1_neg'].head(500), df_edges['qwen_gss2_pos'].head(500), df_edges['qwen_gss2_neg'].head(500)]):
     overlapping_edges=[]
     for i, _ in enumerate(x):
       for j, _ in enumerate(y):
         if(x[i]==y[j]):
           overlapping_edges.append(x[i])
-    overlap_percentage = len(overlapping_edges)*100/(6000-len(overlapping_edges))
+    overlap_percentage = len(overlapping_edges)*100/(1000-len(overlapping_edges))
     top400_overlap_matrix.append(overlap_percentage)
 
-corr_matrix = np.zeros((8, 8))
+corr_matrix = np.zeros((7, 7))
 n=0
-for i in range(8):
-  for j in range(8):
+for i in range(7):
+  for j in range(7):
     corr_matrix[i][j] = top400_overlap_matrix[j+n]
-  n+=8
+  n+=7
 
 import seaborn as sns
 corr_matrix = np.array(corr_matrix)
