@@ -1,6 +1,7 @@
 sudo apt install -y graphviz
 sudo apt install libgraphviz-dev
-pip install pygraphviz cmapy datasets jaxtyping better_abc fancy_einsum wandb einops==0.7.0
+pip install pygraphviz cmapy datasets jaxtyping better_abc fancy_einsum wandb einops==0.7.0 plotly pytest typeguard
 pip install transformer-lens==1.12.0
 pip install numpy==1.26.1
+pip install tf-keras
 git clone https://github.com/hannamw/EAP-positional.git

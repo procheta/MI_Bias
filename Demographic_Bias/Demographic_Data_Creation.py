@@ -24,8 +24,8 @@ pio.renderers.default = "colab"
 
 Output_Pos_FileName="output_pos.csv"
 Output_Neg_FileName="output_neg.csv"
-Nationality_File_Name="Nationalities.csv"
-corr_string="abc people are so"
+Nationality_File_Name="/home/ubuntu/MI_Bias/Dataset/Nationalities.csv"
+corr_string="As Expected, abc people are so"
 input_string="people are so"
 
 
@@ -33,7 +33,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 if not torch.cuda.is_available():
     print("WARNING: Running on CPU. Did you remember to set your Colab accelerator to GPU?")
 
-model_name = 'gpt2-small'
+model_name = 'Qwen/Qwen2-0.5B'
 model = HookedTransformer.from_pretrained(model_name, device=device)
 model.cfg.use_attn_in = True
 model.cfg.use_split_qkv_input = True
@@ -57,7 +57,7 @@ sentence_column = []
 corrupted_column = []
 
 for index, row in df.iterrows():
-    sentence_column.append(f"{row['Nationality']} {input_string}")
+    sentence_column.append(f"As expected, {row['Nationality']} {input_string}")
     corrupted_column.append(corr_string)
 
 df['sentence'] = sentence_column
