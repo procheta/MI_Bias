@@ -1,6 +1,6 @@
 import pandas as pd
 import re
-df=pd.read_csv("/home/ubuntu/topn_qwen_edges.csv",sep=",")
+df=pd.read_csv("/home/ubuntu//MI_Bias/Dataset/topn_gemma_edges.csv",sep=",")
 
 def extract_numbers(text: str) -> str:
     """
@@ -19,7 +19,7 @@ def extract_numbers(text: str) -> str:
 
 
 
-edges=df["qwen_dss1_pos"]
+edges=df["gemma_gss1_pos"]
 
 edge_dict={}
 max_edge=0
@@ -59,7 +59,8 @@ for i in range(max_edge+1):
         if val < 0:
             val=0
         values.append(val)
-
+categories.append(max_edge+1)
+values.append(0)
 
 
 
@@ -68,8 +69,8 @@ plt.bar(categories, values, color="purple")
 
 # Add labels and title
 plt.xlabel("Layers")
-plt.xlim(0,24)
-plt.ylim(0,30)
+plt.xlim(0,25)
+plt.ylim(0,35)
 plt.xticks(ticks=categories,                    # positions
     labels=categories)
 plt.ylabel("#Important Edges")

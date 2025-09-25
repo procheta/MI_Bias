@@ -4,4 +4,5 @@ pip install pygraphviz cmapy datasets jaxtyping better_abc fancy_einsum wandb ei
 pip install transformer-lens==1.12.0
 pip install numpy==1.26.1
 pip install tf-keras
+pip install seaborn
 git clone https://github.com/hannamw/EAP-positional.git
